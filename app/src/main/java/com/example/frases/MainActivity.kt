@@ -70,7 +70,7 @@ fun QuoteScreen() {
         Image(
             painter = painterResource(id = logo),
             contentDescription = "Logo del IEST",
-            //colorFilter = ColorFilter.tint(color = Color(0xFFFFFFFF)),
+            colorFilter = ColorFilter.tint(color = Color(0xFFFFFFFF)),
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(top = 20.dp, end = 20.dp)
