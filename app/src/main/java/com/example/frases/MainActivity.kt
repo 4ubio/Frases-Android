@@ -1,10 +1,12 @@
 package com.example.frases
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +36,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.frases.ui.theme.FrasesTheme
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,11 +60,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun QuoteScreen() {
 
-    var switch_logo by remember {mutableStateOf(true)}
-    var logo by remember {mutableStateOf(R.drawable.iest)}
+    var switch_logo by rememberSaveable {mutableStateOf(true)}
+    var logo by rememberSaveable {mutableStateOf(R.drawable.iest)}
 
-    var switch by remember {mutableStateOf(true)}
-    var newQuote by remember {mutableStateOf("Vince in bono malum")}
+    var switch by rememberSaveable {mutableStateOf(true)}
+    var newQuote by rememberSaveable {mutableStateOf("Vince in bono malum")}
+
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -75,6 +81,19 @@ fun QuoteScreen() {
                 .align(Alignment.TopEnd)
                 .padding(top = 20.dp, end = 20.dp)
                 .size(75.dp)
+                .clickable {
+                    switch_logo = !switch_logo
+
+                    if (switch_logo) {
+                        logo = R.drawable.iest
+                    } else {
+                        logo = R.drawable.anahuac
+                    }
+
+                    Toast
+                        .makeText(context, "Hey, this is a quick message!", Toast.LENGTH_LONG)
+                        .show()
+                }
         )
 
         Box(
